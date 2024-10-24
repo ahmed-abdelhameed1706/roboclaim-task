@@ -12,50 +12,23 @@ import {
   Alert,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Player } from "@/types";
+import { useEffect } from "react";
+
+import { usePlayerStore } from "@/store/playerStore";
 
 export default function PlayerProfile() {
   const params = useParams();
   const router = useRouter();
-  const [player, setPlayer] = useState<Player | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+
+  const { player, loading, error, fetchPlayer } = usePlayerStore();
 
   useEffect(() => {
-    const fetchPlayer = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const response = await fetch(
-          `https://dummyjson.com/products/${params.id}`
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch player data");
-        }
-        const data = await response.json();
-
-        const fetchedPlayer: Player = {
-          id: data.id,
-          name: data.title,
-          game: data.category,
-          avatar: data.thumbnail,
-          ranking: data.price,
-          bio: data.description,
-        };
-
-        setPlayer(fetchedPlayer);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "An unknown error occurred"
-        );
-      } finally {
-        setLoading(false);
-      }
+    const getPlayer = async () => {
+      await fetchPlayer(params.id);
     };
 
-    fetchPlayer();
-  }, [params.id]);
+    getPlayer();
+  }, [params.id, fetchPlayer]);
 
   if (loading) {
     return (

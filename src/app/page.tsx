@@ -10,45 +10,21 @@ import {
 } from "@mui/material";
 import { PlayerCard } from "@/components/PlayerCard";
 import { useState, useEffect } from "react";
-import { Player, DummyProduct } from "@/types";
+
+import { usePlayerStore } from "@/store/playerStore";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [players, setPlayers] = useState<Player[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+
+  const { players, loading, error, fetchPlayers } = usePlayerStore();
 
   useEffect(() => {
-    const fetchPlayers = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        const response = await fetch("https://dummyjson.com/products");
-        if (!response.ok) {
-          throw new Error("Failed to fetch players data");
-        }
-        const data = await response.json();
-        const mappedPlayers = data.products.map((product: DummyProduct) => ({
-          id: product.id,
-          name: product.title,
-          game: product.category,
-          avatar: product.thumbnail,
-          ranking: product.price,
-          bio: product.description,
-        }));
-        setPlayers(mappedPlayers);
-      } catch (err) {
-        setError(
-          err instanceof Error ? err.message : "An unknown error occurred"
-        );
-      } finally {
-        setLoading(false);
-      }
+    const getPlayers = async () => {
+      await fetchPlayers();
     };
 
-    fetchPlayers();
-  }, []);
+    getPlayers();
+  }, [fetchPlayers]);
 
   const filteredPlayers = players.filter(
     (player) =>

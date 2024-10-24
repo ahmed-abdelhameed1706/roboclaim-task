@@ -1,4 +1,3 @@
-// src/app/(pages)/player/[id]/page.tsx
 "use client";
 import { useParams } from "next/navigation";
 import {
@@ -9,6 +8,7 @@ import {
   Grid,
   Chip,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -17,28 +17,28 @@ import { Player } from "@/types";
 export default function PlayerProfile() {
   const params = useParams();
   const router = useRouter();
-  const [player, setPlayer] = useState<Player | null>(null); // Initialize player state
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [player, setPlayer] = useState<Player | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPlayer = async () => {
+      setLoading(true);
       const response = await fetch(
         `https://dummyjson.com/products/${params.id}`
-      ); // Update with the correct endpoint
+      );
       const data = await response.json();
 
-      // Map the fetched data to your Player interface
       const fetchedPlayer: Player = {
         id: data.id,
         name: data.title,
         game: data.category,
         avatar: data.thumbnail,
-        ranking: data.price, // Assuming price is used for ranking
+        ranking: data.price,
         bio: data.description,
       };
 
       setPlayer(fetchedPlayer);
-      setLoading(false); // Set loading to false after fetching
+      setLoading(false);
     };
 
     fetchPlayer();
@@ -46,8 +46,15 @@ export default function PlayerProfile() {
 
   if (loading) {
     return (
-      <Container>
-        <Typography>Loading...</Typography>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
       </Container>
     );
   }

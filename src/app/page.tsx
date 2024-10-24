@@ -6,6 +6,7 @@ import {
   Box,
   TextField,
   CircularProgress,
+  Alert,
 } from "@mui/material";
 import { PlayerCard } from "@/components/PlayerCard";
 import { useState, useEffect } from "react";
@@ -15,22 +16,35 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
   const [players, setPlayers] = useState<Player[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPlayers = async () => {
       setLoading(true);
-      const response = await fetch("https://dummyjson.com/products");
-      const data = await response.json();
-      const mappedPlayers = data.products.map((product: DummyProduct) => ({
-        id: product.id,
-        name: product.title,
-        game: product.category,
-        avatar: product.thumbnail,
-        ranking: product.price,
-        bio: product.description,
-      }));
-      setPlayers(mappedPlayers);
-      setLoading(false);
+      setError(null);
+
+      try {
+        const response = await fetch("https://dummyjson.com/products");
+        if (!response.ok) {
+          throw new Error("Failed to fetch players data");
+        }
+        const data = await response.json();
+        const mappedPlayers = data.products.map((product: DummyProduct) => ({
+          id: product.id,
+          name: product.title,
+          game: product.category,
+          avatar: product.thumbnail,
+          ranking: product.price,
+          bio: product.description,
+        }));
+        setPlayers(mappedPlayers);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "An unknown error occurred"
+        );
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchPlayers();
@@ -69,6 +83,10 @@ export default function Home() {
         >
           <CircularProgress />
         </Box>
+      ) : error ? (
+        <Alert severity="error" sx={{ mb: 4 }}>
+          {error}
+        </Alert>
       ) : (
         <Grid container spacing={4}>
           {filteredPlayers.map((player) => (

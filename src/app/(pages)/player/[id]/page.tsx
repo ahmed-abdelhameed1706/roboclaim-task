@@ -9,6 +9,7 @@ import {
   Chip,
   Button,
   CircularProgress,
+  Alert,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -19,26 +20,38 @@ export default function PlayerProfile() {
   const router = useRouter();
   const [player, setPlayer] = useState<Player | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPlayer = async () => {
       setLoading(true);
-      const response = await fetch(
-        `https://dummyjson.com/products/${params.id}`
-      );
-      const data = await response.json();
+      setError(null);
+      try {
+        const response = await fetch(
+          `https://dummyjson.com/products/${params.id}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch player data");
+        }
+        const data = await response.json();
 
-      const fetchedPlayer: Player = {
-        id: data.id,
-        name: data.title,
-        game: data.category,
-        avatar: data.thumbnail,
-        ranking: data.price,
-        bio: data.description,
-      };
+        const fetchedPlayer: Player = {
+          id: data.id,
+          name: data.title,
+          game: data.category,
+          avatar: data.thumbnail,
+          ranking: data.price,
+          bio: data.description,
+        };
 
-      setPlayer(fetchedPlayer);
-      setLoading(false);
+        setPlayer(fetchedPlayer);
+      } catch (err) {
+        setError(
+          err instanceof Error ? err.message : "An unknown error occurred"
+        );
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchPlayer();
@@ -55,6 +68,16 @@ export default function PlayerProfile() {
         }}
       >
         <CircularProgress />
+      </Container>
+    );
+  }
+
+  if (error) {
+    return (
+      <Container>
+        <Alert severity="error" sx={{ mb: 4 }}>
+          {error} {/* Display error message */}
+        </Alert>
       </Container>
     );
   }

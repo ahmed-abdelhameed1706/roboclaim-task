@@ -3,12 +3,15 @@ export interface Player {
   name: string;
   game: string;
   avatar: string;
-  team?: string;
   ranking: number;
   bio: string;
-  stats: {
-    winRate: number;
-    tournaments: number;
-    achievements: string[];
-  };
+}
+
+export interface DummyProduct {
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+  thumbnail: string;
+  description: string;
 }

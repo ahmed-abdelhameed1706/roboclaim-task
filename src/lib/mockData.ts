@@ -9,11 +9,6 @@ export const players: Player[] = [
     team: "T1",
     ranking: 99,
     bio: "Legendary mid-laner, considered the GOAT of LoL.",
-    stats: {
-      winRate: 68,
-      tournaments: 89,
-      achievements: ["3x World Champion", "MSI Champion"],
-    },
   },
   {
     id: 2,
@@ -23,11 +18,6 @@ export const players: Player[] = [
     team: "Ninja Clan",
     ranking: 95,
     bio: "One of the most recognizable names in gaming.",
-    stats: {
-      winRate: 65,
-      tournaments: 45,
-      achievements: ["World Cup Champion", "Twitch Streamer of the Year"],
-    },
   },
   {
     id: 3,
@@ -37,11 +27,6 @@ export const players: Player[] = [
     team: "Cloud9",
     ranking: 92,
     bio: "Professional gamer known for his incredible aim.",
-    stats: {
-      winRate: 70,
-      tournaments: 30,
-      achievements: ["Valorant Champions Tour Winner", "Best Shooter Player"],
-    },
   },
   {
     id: 4,
@@ -51,11 +36,6 @@ export const players: Player[] = [
     team: "NAVI",
     ranking: 98,
     bio: "Considered the best CS:GO player in history.",
-    stats: {
-      winRate: 72,
-      tournaments: 120,
-      achievements: ["Major Champion", "ESL One Winner"],
-    },
   },
   {
     id: 5,
@@ -65,11 +45,6 @@ export const players: Player[] = [
     team: "FunPlus Phoenix",
     ranking: 90,
     bio: "World Champion and innovator in mid-lane strategies.",
-    stats: {
-      winRate: 66,
-      tournaments: 50,
-      achievements: ["World Champion 2019", "LPL MVP"],
-    },
   },
   {
     id: 6,
@@ -79,11 +54,6 @@ export const players: Player[] = [
     team: "OG",
     ranking: 91,
     bio: "Two-time TI champion and one of Dota 2's best captains.",
-    stats: {
-      winRate: 63,
-      tournaments: 80,
-      achievements: ["2x TI Champion", "Dota 2 Major Winner"],
-    },
   },
   {
     id: 7,
@@ -93,11 +63,6 @@ export const players: Player[] = [
     team: "Cloud9",
     ranking: 88,
     bio: "Rising star in the Valorant scene.",
-    stats: {
-      winRate: 68,
-      tournaments: 25,
-      achievements: ["Valorant Champions Tour Winner", "Best Rookie"],
-    },
   },
   {
     id: 8,
@@ -107,11 +72,6 @@ export const players: Player[] = [
     team: "Vitality",
     ranking: 96,
     bio: "Young prodigy known for his incredible skill.",
-    stats: {
-      winRate: 71,
-      tournaments: 35,
-      achievements: ["Major Champion", "Best Player 2020"],
-    },
   },
   {
     id: 9,
@@ -121,11 +81,6 @@ export const players: Player[] = [
     team: "Team Liquid",
     ranking: 87,
     bio: "Legendary ADC with multiple championships.",
-    stats: {
-      winRate: 65,
-      tournaments: 90,
-      achievements: ["LCS Champion", "Most LCS Titles"],
-    },
   },
   {
     id: 10,
@@ -135,11 +90,6 @@ export const players: Player[] = [
     team: "New York Excelsior",
     ranking: 85,
     bio: "Versatile player known for adaptability.",
-    stats: {
-      winRate: 60,
-      tournaments: 40,
-      achievements: ["OW League Contenders Winner"],
-    },
   },
   {
     id: 11,
@@ -149,11 +99,6 @@ export const players: Player[] = [
     team: "TSM",
     ranking: 89,
     bio: "Known for clutch performances in high-stakes matches.",
-    stats: {
-      winRate: 62,
-      tournaments: 50,
-      achievements: ["PUBG Global Championship Winner"],
-    },
   },
   {
     id: 12,
@@ -163,11 +108,6 @@ export const players: Player[] = [
     team: "G2 Esports",
     ranking: 94,
     bio: "A sniper known for his quick reflexes.",
-    stats: {
-      winRate: 69,
-      tournaments: 75,
-      achievements: ["Major Champion", "Best Sniper"],
-    },
   },
   {
     id: 13,
@@ -177,11 +117,6 @@ export const players: Player[] = [
     team: "G2 Esports",
     ranking: 86,
     bio: "One of the most experienced junglers in LoL.",
-    stats: {
-      winRate: 64,
-      tournaments: 70,
-      achievements: ["LCS Champion", "EU Masters Winner"],
-    },
   },
   {
     id: 14,
@@ -191,11 +126,6 @@ export const players: Player[] = [
     team: "B0aty Clan",
     ranking: 80,
     bio: "Popular streamer known for his educational content.",
-    stats: {
-      winRate: 55,
-      tournaments: 15,
-      achievements: ["Runescape Streamer of the Year"],
-    },
   },
   {
     id: 15,
@@ -205,11 +135,6 @@ export const players: Player[] = [
     team: "TNC Predator",
     ranking: 90,
     bio: "Talented carry player with great mechanics.",
-    stats: {
-      winRate: 66,
-      tournaments: 45,
-      achievements: ["Major Champion", "ESL One Winner"],
-    },
   },
   {
     id: 16,
@@ -219,11 +144,6 @@ export const players: Player[] = [
     team: "EGO",
     ranking: 99,
     bio: "Fighting game champion known for multiple titles.",
-    stats: {
-      winRate: 75,
-      tournaments: 60,
-      achievements: ["Mortal Kombat World Champion", "EVO Champion"],
-    },
   },
   {
     id: 17,
@@ -233,11 +153,6 @@ export const players: Player[] = [
     team: "NRG",
     ranking: 85,
     bio: "Apex Legends professional known for his skills.",
-    stats: {
-      winRate: 67,
-      tournaments: 35,
-      achievements: ["Apex Legends Global Series Champion"],
-    },
   },
   {
     id: 18,
@@ -247,11 +162,6 @@ export const players: Player[] = [
     team: "SK Gaming",
     ranking: 93,
     bio: "One of the best AWPers in the CS:GO scene.",
-    stats: {
-      winRate: 68,
-      tournaments: 100,
-      achievements: ["Major Champion", "Best Player 2016"],
-    },
   },
   {
     id: 19,
@@ -261,11 +171,6 @@ export const players: Player[] = [
     team: "Ninjas in Pyjamas",
     ranking: 88,
     bio: "A legendary player known for his clutch plays.",
-    stats: {
-      winRate: 66,
-      tournaments: 110,
-      achievements: ["Major Champion", "Best Player 2013"],
-    },
   },
   {
     id: 20,
@@ -275,10 +180,5 @@ export const players: Player[] = [
     team: "Team Liquid",
     ranking: 92,
     bio: "Legendary support player and multiple TI champion.",
-    stats: {
-      winRate: 64,
-      tournaments: 95,
-      achievements: ["2x TI Champion", "Best Support Player"],
-    },
   },
 ];

@@ -12,7 +12,7 @@ export function PlayerCard({ player }: PlayerCardProps) {
 
   return (
     <Card
-      onClick={() => router.push(`/player/${player.id}`)} // Changed from `/player/${player.id}` to use backticks
+      onClick={() => router.push(`/player/${player.id}`)}
       sx={{
         cursor: "pointer",
         height: "100%",
@@ -33,9 +33,6 @@ export function PlayerCard({ player }: PlayerCardProps) {
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography color="text.secondary">{player.game}</Typography>
-          {player.team && (
-            <Typography color="text.secondary">{player.team}</Typography>
-          )}
         </Box>
       </CardContent>
     </Card>

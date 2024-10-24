@@ -1,3 +1,4 @@
+// src/app/(pages)/player/[id]/page.tsx
 "use client";
 import { useParams } from "next/navigation";
 import {
@@ -9,13 +10,47 @@ import {
   Chip,
   Button,
 } from "@mui/material";
-import { players } from "@/lib/mockData";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Player } from "@/types";
 
 export default function PlayerProfile() {
   const params = useParams();
   const router = useRouter();
-  const player = players.find((p) => p.id === Number(params.id));
+  const [player, setPlayer] = useState<Player | null>(null); // Initialize player state
+  const [loading, setLoading] = useState(true); // Add loading state
+
+  useEffect(() => {
+    const fetchPlayer = async () => {
+      const response = await fetch(
+        `https://dummyjson.com/products/${params.id}`
+      ); // Update with the correct endpoint
+      const data = await response.json();
+
+      // Map the fetched data to your Player interface
+      const fetchedPlayer: Player = {
+        id: data.id,
+        name: data.title,
+        game: data.category,
+        avatar: data.thumbnail,
+        ranking: data.price, // Assuming price is used for ranking
+        bio: data.description,
+      };
+
+      setPlayer(fetchedPlayer);
+      setLoading(false); // Set loading to false after fetching
+    };
+
+    fetchPlayer();
+  }, [params.id]);
+
+  if (loading) {
+    return (
+      <Container>
+        <Typography>Loading...</Typography>
+      </Container>
+    );
+  }
 
   if (!player) {
     return (
@@ -47,15 +82,11 @@ export default function PlayerProfile() {
             <Typography variant="h4" gutterBottom sx={{ mt: 2 }}>
               {player.name}
             </Typography>
-            <Typography color="text.secondary" gutterBottom>
-              {player.team}
-            </Typography>
             <Chip
               label={`Ranking: ${player.ranking}`}
               color="primary"
               sx={{ mt: 1 }}
-            />{" "}
-            {/* Fixed template string */}
+            />
           </Paper>
         </Grid>
 
@@ -65,36 +96,6 @@ export default function PlayerProfile() {
               About
             </Typography>
             <Typography paragraph>{player.bio}</Typography>
-
-            <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
-              Statistics
-            </Typography>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={4}>
-                <Paper elevation={3} sx={{ p: 2, textAlign: "center" }}>
-                  <Typography variant="h6">{player.stats.winRate}%</Typography>
-                  <Typography color="text.secondary">Win Rate</Typography>
-                </Paper>
-              </Grid>
-              <Grid item xs={12} sm={4}>
-                <Paper elevation={3} sx={{ p: 2, textAlign: "center" }}>
-                  <Typography variant="h6">
-                    {player.stats.tournaments}
-                  </Typography>
-                  <Typography color="text.secondary">Tournaments</Typography>
-                </Paper>
-              </Grid>
-            </Grid>
-
-            <Typography variant="h5" gutterBottom sx={{ mt: 4 }}>
-              Achievements
-            </Typography>
-
-            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-              {player.stats.achievements.map((achievement, index) => (
-                <Chip key={index} label={achievement} color="secondary" />
-              ))}
-            </Box>
           </Paper>
         </Grid>
       </Grid>
